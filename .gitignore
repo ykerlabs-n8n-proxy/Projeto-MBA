@@ -1,0 +1,10 @@
+\.venv/
+.quarto/
+ .trash/
+*_files/
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+/.vscode/
+/.DS_Store
