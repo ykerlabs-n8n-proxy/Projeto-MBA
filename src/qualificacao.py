@@ -61,7 +61,7 @@ def _load_api_key() -> str:
         if raw.startswith("sk-ant-"):
             os.environ["ANTHROPIC_API_KEY"] = raw
             return raw
-    return "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"
+    return none
 
 
 def qualificar_lead(texto_para_llm: str) -> LeadQualificado:
