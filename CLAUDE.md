@@ -20,13 +20,16 @@ Briefing do projeto — entregue como PDF via Quarto e apresentação executiva.
 
 ### 2. Data Understanding
 
-- Fonte principal: arquivo CSV com leads contendo colunas como nome, email, telefone, empresa, cargo, mensagem, origem e data_criacao.
+- Fonte principal: arquivo CSV local chamado data/leads.csv, contendo leads fictícios e realistas de pré-vendas B2B.
+- Volume da amostra: 15 leads.
+- Colunas disponíveis: id, empresa, segmento, porte, nome_contato, cargo, origem, mensagem_necessidade e data_entrada.
 - Objetivo desta fase: compreender a qualidade, cobertura e relevância das colunas disponíveis para a classificação automatizada.
 - Perguntas a responder:
   - Quais colunas estão presentes no CSV?
   - Quais campos tendem a ter informação útil para qualificação?
   - Quais campos são incompletos, ruidosos ou inconsistentes?
   - Como o texto da mensagem pode ser usado para inferir necessidade e urgência?
+- Estimativa de tokens por lead: os caracteres da coluna mensagem_necessidade foram contados e a estimativa foi feita como caracteres / 4. Para a base atual, a estimativa ficou em torno de 70 a 90 tokens por lead, com média aproximada de 80 tokens por lead.
 - Espaço para preenchimento: [descrever a análise exploratória, estatísticas básicas, exemplos de leads e problemas de qualidade encontrados].
 - Espaço para a fase seguinte: [definir quais colunas serão normalizadas, limpas e enriquecidas antes do treinamento/uso do LLM].
 

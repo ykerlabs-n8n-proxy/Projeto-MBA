@@ -1,1 +1,4 @@
-# Adicione dependências aqui. Mantido vazio por enquanto.
+pandas
+anthropic
+python-dotenv
+pydantic

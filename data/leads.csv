@@ -1,0 +1,16 @@
+id,empresa,segmento,porte,nome_contato,cargo,origem,mensagem_necessidade,data_entrada
+L001,TechNova Brasil,tecnologia,media,Ana Santos,Gerente de TI,formulario_site,"Precisamos modernizar a gestão de tickets e reduzir o tempo de resposta da equipe. O projeto é urgente porque o volume de chamados cresceu muito nos últimos meses.",01/07/2026
+L002,FlexLog Supply,logistica,grande,Bruno Almeida,Diretor de Operações,evento,"Estamos avaliando soluções para acompanhar entregas em tempo real. Gostaríamos de ver um piloto com integração ao nosso WMS.",02/07/2026
+L003,Saúde Mais,saude,media,Carla Mendes,Coordenadora de Compras,inbound,"Temos interesse em reduzir custos com fornecedores de insumos. Preciso de uma proposta com foco em controle e rastreabilidade.",03/07/2026
+L004,Moderna Móveis,varejo,pequena,Diego Torres,CEO,indicacao,"Recebemos indicação de um parceiro e estamos curiosos sobre o funcionamento. Ainda estamos no estágio inicial de avaliação.",04/07/2026
+L005,Prime Indústria,industria,grande,Elisa Rocha,Gerente de Produção,formulario_site,"Nossa linha de produção precisa de maior visibilidade de estoque e paradas. O problema já está impactando a rotina da planta.",05/07/2026
+L006,Clinipharma,saude,grande,Fábio Nunes,Diretor Financeiro,evento,"Queremos entender se a solução ajuda com automação de processos financeiros. A decisão depende de um estudo de ROI e segurança.",06/07/2026
+L007,North Retail,varejo,media,Gabriela Pires,Head de Operações,inbound,"Estamos analisando alternativas para melhorar a experiência de compra online. A necessidade é mais estratégica do que imediata.",07/07/2026
+L008,Transporte Vale,logistica,media,Hugo Lima,Gerente de TI,formulario_site,"Nosso time precisa de uma ferramenta para integrar frota e comunicação. Existe urgência para reduzir falhas operacionais.",08/07/2026
+L009,DataHub Solutions,tecnologia,pequena,Isabela Costa,Diretora Comercial,indicacao,"Recebemos uma indicação de um fornecedor e gostaríamos de conhecer melhor a proposta. Ainda não temos um prazo definido.",09/07/2026
+L010,Metalfort,industria,grande,João Pereira,Compras,evento,"Estamos em processo de padronização de fornecedores. Queremos ver se há ganho em eficiência e controle documental.",10/07/2026
+L011,Vitale Saúde,saude,media,Karina Souza,Gerente de TI,inbound,"A demanda surgiu após uma auditoria interna. Precisamos de uma solução mais rápida para controle de acesso e relatórios.",11/07/2026
+L012,CityCenter Varejo,varejo,grande,Leandro Martins,Diretor de Tecnologia,formulario_site,"Já avaliamos algumas opções, mas não encontramos uma que atenda bem a operação. Gostaríamos de conversar em breve.",12/07/2026
+L013,Logis Norte,logistica,pequena,Maria Fernanda,Coordenadora de Compras,indicacao,"Estamos em fase inicial de pesquisa e queremos entender melhor o mercado. O contato foi feito por indicação de um parceiro.",13/07/2026
+L014,CloudGrid,tecnologia,media,Neto Barbosa,CEO,inbound,"Temos interesse em modernizar a gestão de clientes e automação comercial. O projeto está em discussão no time executivo.",14/07/2026
+L015,AgroMax,industria,media,Olívia Ramos,Gerente de Operações,evento,"A necessidade apareceu após uma reunião de planejamento. A prioridade é melhorar a integração entre produção e logística.",14/07/2026
