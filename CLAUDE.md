@@ -1,4 +1,4 @@
-# CLAUDE.md — Projeto Final: Qualificação automática de leads (SDR)
+CLAUDE.md — Projeto Final: Qualificação automática de leads (SDR)
 
 Briefing do projeto — entregue como PDF via Quarto e apresentação executiva. Leia antes de editar.
 
@@ -16,7 +16,7 @@ Briefing do projeto — entregue como PDF via Quarto e apresentação executiva.
 - Entregáveis: paper em PDF via Quarto e apresentação executiva.
 - Regra de ouro: nunca inventar números. Todo valor citado deve vir de uma execução de código reexecutável.
 - Premissas e restrições: a chave da API já está configurada no arquivo .env via ANTHROPIC_API_KEY; o projeto deve usar apenas a API da Anthropic.
-- Espaço para a fase seguinte: [definir o conjunto de leads, colunas do CSV e critérios de negócio que serão validados na fase de Data Understanding].
+- Resultado da fase seguinte: conjunto de 15 leads B2B fictícios em data/leads.csv com 9 colunas, incluindo mensagem_necessidade como campo principal para qualificação.
 
 ### 2. Data Understanding
 
@@ -30,8 +30,8 @@ Briefing do projeto — entregue como PDF via Quarto e apresentação executiva.
   - Quais campos são incompletos, ruidosos ou inconsistentes?
   - Como o texto da mensagem pode ser usado para inferir necessidade e urgência?
 - Estimativa de tokens por lead: os caracteres da coluna mensagem_necessidade foram contados e a estimativa foi feita como caracteres / 4. Para a base atual, a estimativa ficou em torno de 70 a 90 tokens por lead, com média aproximada de 80 tokens por lead.
-- Espaço para preenchimento: [descrever a análise exploratória, estatísticas básicas, exemplos de leads e problemas de qualidade encontrados].
-- Espaço para a fase seguinte: [definir quais colunas serão normalizadas, limpas e enriquecidas antes do treinamento/uso do LLM].
+- Resultado: 15 leads carregados, nenhum com mensagem_necessidade vazia. Segmentos presentes: tecnologia, logística, saúde, indústria, varejo. Origens: formulario_site (4), indicacao (4), inbound (4), evento (3).
+- Resultado da fase seguinte: colunas segmento, porte, origem e cargo normalizadas para lowercase. Coluna texto_para_llm criada concatenando os campos relevantes de cada lead.
 
 ### 3. Data Preparation
 
@@ -43,8 +43,8 @@ Briefing do projeto — entregue como PDF via Quarto e apresentação executiva.
   - criar registros estruturados para envio ao LLM;
   - preservar a rastreabilidade entre entrada e saída.
 - Estratégia de saída estruturada: usar Pydantic para garantir que cada lead receba os campos esperados.
-- Espaço para preenchimento: [descrever as regras de limpeza, normalização, tratamento de valores ausentes e formato final dos dados].
-- Espaço para a fase seguinte: [definir o prompt, os exemplos e a estratégia de execução do modelo para a fase de Modeling].
+- Resultado: script src/preparacao.py executado com sucesso. 15 leads limpos, textos normalizados para lowercase, coluna texto_para_llm criada. Saída: data/leads_preparados.csv.
+- Resultado da fase seguinte: prompt com persona de especialista em pré-vendas B2B, temperature=0, schema Pydantic com 6 campos fixos garantindo comparabilidade entre todos os leads.
 
 ### 4. Modeling
 
@@ -55,8 +55,8 @@ Briefing do projeto — entregue como PDF via Quarto e apresentação executiva.
   - model: claude-haiku-4-5;
   - temperature: 0.
 - Saída esperada: score_qualificacao, categoria_interesse, urgencia, resumo_necessidade, proxima_acao_sugerida.
-- Espaço para preenchimento: [descrever o prompt, a lógica de parsing via Pydantic, o fluxo de iteração por lead e o tratamento de erros].
-- Espaço para a fase seguinte: [definir a estratégia de avaliação quantitativa e qualitativa dos resultados].
+- Resultado: script src/qualificacao.py executado com sucesso. 15 leads classificados via API Anthropic (claude-haiku-4-5, temperature=0). Schema Pydantic com 6 campos. Saída: data/leads_qualificados.csv.
+- Resultado da fase seguinte: avaliação por distribuição de scores, cruzamento segmento x score e análise de consistência entre urgência e próxima ação sugerida.
 
 ### 5. Evaluation
 
@@ -67,15 +67,15 @@ Briefing do projeto — entregue como PDF via Quarto e apresentação executiva.
   - utilidade da próxima ação sugerida;
   - redução de tempo em comparação ao processo manual.
 - Métrica principal: comparação do tempo de triagem manual antes e depois da automação, medida a partir de código reexecutável.
-- Espaço para preenchimento: [descrever os testes, amostras de validação, critérios de revisão humana e métricas adicionais].
-- Espaço para a fase seguinte: [definir como o resultado será apresentado em produção e em formato executivo].
+- Resultado real (data/avaliacao.md): 11 leads quentes (73.3%), 4 mornos (26.7%), 0 frios. Urgência alta: 10 leads. Indústria e saúde: 100% quentes. Varejo: maior proporção de mornos.
+- Resultado da fase seguinte: paper_final.pdf gerado via Quarto + LaTeX com os resultados reais do pipeline. Apresentação executiva com problema, solução, resultados e próximos passos.
 
 ### 6. Deployment
 
 - Objetivo: entregar o projeto de forma reproducível e utilizável.
 - Entregáveis finais: paper em PDF via Quarto e apresentação executiva com os principais resultados, limitações e recomendações.
 - Forma de uso esperada: execução do pipeline sobre um novo CSV de leads, com saída estruturada e pronta para análise ou uso operacional.
-- Espaço para preenchimento: [descrever o fluxo de execução, dependências, instruções de uso e plano de manutenção].
+- Resultado: paper_final.pdf gerado via quarto render paper_final.qmd --to pdf. Pipeline completo: src/preparacao.py → src/qualificacao.py → data/leads_qualificados.csv → paper_final.pdf.
 
 ## Regras do projeto
 
@@ -84,18 +84,15 @@ Briefing do projeto — entregue como PDF via Quarto e apresentação executiva.
 - Nenhum número deve ser inventado; todo valor citado deve ser gerado por execução de código.
 
 ## Estrutura mínima do projeto (esperada)
-
-```
 .
 ├── CLAUDE.md
 ├── README.md
 ├── .gitignore
 ├── .env.example
 ├── requirements.txt
-├── data/              # onde o CSV de leads ficará (não comitado se sensível)
-├── src/               # código Python: coleta, pré-processamento, modelagem
-└── paper/             # arquivos Quarto (.qmd) e templates do paper final
-```
+├── data/
+├── src/
+└── paper/
 
 ## Como criar e ativar o .venv (Windows / macOS / Linux)
 
@@ -103,7 +100,7 @@ Windows (PowerShell):
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1    # ou .\.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
@@ -121,17 +118,12 @@ pip install -r requirements.txt
 
 1. Abra o comando: Ctrl+Shift+P (ou Cmd+Shift+P no macOS).
 2. Digite: Python: Select Interpreter.
-3. Escolha o interpretador apontando para ./ .venv/bin/python (macOS/Linux)
-   ou ./.venv\Scripts\python.exe (Windows).
-
-Após isso, o VS Code usará o .venv para executar e depurar código, e para a instalação de pacotes pelo gerenciador integrado.
+3. Escolha o interpretador apontando para ./.venv/bin/python (macOS/Linux) ou ./.venv\Scripts\python.exe (Windows).
 
 ## Renderizar o paper final (Quarto → PDF)
 
-Coloque os arquivos .qmd em paper/ e rode:
-
 ```bash
-quarto render paper/paper.qmd --to pdf
+quarto render paper_final.qmd --to pdf
 ```
 
 Se houver erro de LaTeX, rode quarto check e instale dependências faltantes.
