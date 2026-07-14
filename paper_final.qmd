@@ -1,0 +1,43 @@
+---
+title: "Qualificação Automática de Leads de Pré-Vendas com LLM"
+author: "Yker"
+date: today
+format: pdf
+lang: pt
+---
+
+## Resumo
+
+Pipeline CRISP-DM que classifica leads B2B via API Anthropic com saída estruturada Pydantic. 15 leads processados, 73% classificados como quentes.
+
+## 1. Entendimento do Negócio
+
+Times de pré-vendas recebem leads de formulários, eventos e inbound marketing. O SDR gasta tempo lendo cada lead manualmente para decidir: é quente ou frio? Qual produto faz sentido? Qual a urgência?
+
+**Métrica de sucesso:** redução do tempo de triagem manual — antes manual lead a lead, depois automático e instantâneo.
+
+## 2. Entendimento dos Dados
+
+Fonte: arquivo CSV local com 15 leads fictícios mas realistas de pré-vendas B2B. Colunas: id, empresa, segmento, porte, nome_contato, cargo, origem, mensagem_necessidade, data_entrada.
+
+## 3. Preparação dos Dados
+
+Limpeza básica, normalização de texto e criação da coluna texto_para_llm concatenando os campos relevantes de cada lead.
+
+## 4. Modelagem
+
+LLM: claude-haiku-4-5, temperature=0, saída estruturada via Pydantic. Schema: score_qualificacao, categoria_interesse, urgencia, resumo_necessidade, proxima_acao_sugerida, justificativa.
+
+## 5. Avaliação
+
+- Total de leads processados: 15
+- Leads quentes: 11 (73,3%)
+- Leads mornos: 4 (26,7%)
+- Leads frios: 0 (0%)
+- Urgência alta: 10 (66,7%)
+
+Indústria e saúde apresentaram 100% de leads quentes. Varejo teve maior proporção de leads mornos.
+
+## 6. Implantação
+
+Pipeline reprodutível: preparacao.py → qualificacao.py → leads_qualificados.csv. Repositório versionado no GitHub com histórico de commits por fase.
